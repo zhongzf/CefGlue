@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32.SafeHandles;
+using Microsoft.Win32.SafeHandles;
 using System;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -39,14 +39,9 @@ namespace Xilium.CefGlue.WPF
             return null;
         }
 
-        protected override bool GetRootScreenRect(CefBrowser browser, ref CefRectangle rect)
+        protected override void GetViewRect(CefBrowser browser, out CefRectangle rect)
         {
-            return _owner.GetViewRect(ref rect);
-        }
-
-        protected override bool GetViewRect(CefBrowser browser, ref CefRectangle rect)
-        {
-            return _owner.GetViewRect(ref rect);
+            _owner.GetViewRect(out rect);
         }
 
         protected override bool GetScreenPoint(CefBrowser browser, int viewX, int viewY, ref int screenX, ref int screenY)
@@ -102,6 +97,10 @@ namespace Xilium.CefGlue.WPF
         }
 
         protected override void OnImeCompositionRangeChanged(CefBrowser browser, CefRange selectedRange, CefRectangle[] characterBounds)
+        {
+        }
+
+        protected override void OnAcceleratedPaint(CefBrowser browser, CefPaintElementType type, CefRectangle[] dirtyRects, IntPtr sharedHandle)
         {
         }
     }
